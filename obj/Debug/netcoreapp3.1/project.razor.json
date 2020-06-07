@@ -20546,8 +20546,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Pet\\Details.cshtml",
+      "TargetPath": "Views\\Pet\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Csharp\\MvcPet\\Areas\\Identity\\Pages\\Account\\Manage\\PersonalData.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\PersonalData.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Pet\\Index.cshtml",
+      "TargetPath": "Views\\Pet\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20646,6 +20656,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Pet\\Edit.cshtml",
+      "TargetPath": "Views\\Pet\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Csharp\\MvcPet\\Areas\\Identity\\Pages\\Account\\Logout.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Logout.cshtml",
       "FileKind": "mvc"
@@ -20706,6 +20721,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Pet\\Delete.cshtml",
+      "TargetPath": "Views\\Pet\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Csharp\\MvcPet\\Areas\\Identity\\Pages\\Account\\Manage\\Email.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\Email.cshtml",
       "FileKind": "mvc"
@@ -20748,6 +20768,11 @@
     {
       "FilePath": "e:\\Csharp\\MvcPet\\Areas\\Identity\\Pages\\Account\\Manage\\_Layout.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Pet\\Create.cshtml",
+      "TargetPath": "Views\\Pet\\Create.cshtml",
       "FileKind": "mvc"
     },
     {

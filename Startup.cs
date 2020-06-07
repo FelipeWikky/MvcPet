@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MvcPet.Data;
+using MvcPet.Areas.Identity.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MvcPet
 {
@@ -24,6 +27,18 @@ namespace MvcPet
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            
+            services.AddDbContext<MvcPetContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("MvcPetContext")
+                )
+            );
+
+            // services.AddDbContext<MvcPetIdentityDbContext>(options =>
+            //     options.UseSqlite(
+            //         Configuration.GetConnectionString("MvcPetIdentityDbContext")
+            //     )
+            // );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
