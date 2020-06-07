@@ -25,5 +25,7 @@ namespace MvcPet.Models
 
     [Display(Name = "Doador")]
     public User donor { get; set; }
+
+    public string donoruserId {get;set;}
   }
 }

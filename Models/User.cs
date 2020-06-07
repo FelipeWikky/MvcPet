@@ -16,6 +16,6 @@ namespace MvcPet.Models
     [Display(Name = "Telefone")]
     public string phone { get; set; }
 
-    public ICollection<Pet> pets {get; set;}
+    public virtual ICollection<Pet> pets {get; set;}
   }
 }
