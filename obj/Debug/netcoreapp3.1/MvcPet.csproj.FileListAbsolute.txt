@@ -220,3 +220,4 @@ E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Pet\Delete.cshtml.g.cs
 E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Pet\Details.cshtml.g.cs
 E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Pet\Edit.cshtml.g.cs
 E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Pet\Index.cshtml.g.cs
+E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Home\About.cshtml.g.cs

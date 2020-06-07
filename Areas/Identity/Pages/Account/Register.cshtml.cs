@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
+using MvcPet.Models;
+using MvcPet.Data;
+
 namespace MvcPet.Areas.Identity.Pages.Account
 {
   [AllowAnonymous]
@@ -24,16 +27,20 @@ namespace MvcPet.Areas.Identity.Pages.Account
     private readonly ILogger<RegisterModel> _logger;
     private readonly IEmailSender _emailSender;
 
+    private readonly MvcPetContext _context;
+
     public RegisterModel(
         UserManager<IdentityUser> userManager,
         SignInManager<IdentityUser> signInManager,
         ILogger<RegisterModel> logger,
-        IEmailSender emailSender)
+        IEmailSender emailSender,
+        MvcPetContext context)
     {
       _userManager = userManager;
       _signInManager = signInManager;
       _logger = logger;
       _emailSender = emailSender;
+      _context = context;
     }
 
     [BindProperty]
@@ -62,6 +69,11 @@ namespace MvcPet.Areas.Identity.Pages.Account
       [Display(Name = "Confirme a Senha")]
       [Compare("Password", ErrorMessage = "As senhas informadas não coincidem.")]
       public string ConfirmPassword { get; set; }
+
+      [Required(ErrorMessage="Informe seu Nome para realizar o cadastro")]
+      [StringLength(30, ErrorMessage="Precisa ter no mínimo {1} caracteres.", MinimumLength = 3)]
+      [Display(Name="Nome Completo")]
+      public string name {get; set;}
     }
 
     public async Task OnGetAsync(string returnUrl = null)
@@ -80,6 +92,15 @@ namespace MvcPet.Areas.Identity.Pages.Account
         var result = await _userManager.CreateAsync(user, Input.Password);
         if (result.Succeeded)
         {
+          //Criando Usuário na tabela User
+          User localUser = new User();
+          localUser.userId = user.Id;
+          localUser.name = Input.name;
+          localUser.email = Input.Email;
+          _context.Add(localUser);
+          await _context.SaveChangesAsync();
+          //fim da criação
+          
           _logger.LogInformation("User created a new account with password.");
 
           var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

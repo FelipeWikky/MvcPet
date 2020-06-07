@@ -18,6 +18,17 @@ body {
   text-align: center;
 }
 
+div.grid-container {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 20px;
+  row-gap: 20px;
+}
+
+div.grid-item {
+  width: auto;
+}
 /*-----------------*/
 
 a.navbar-brand {

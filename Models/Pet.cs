@@ -9,20 +9,21 @@ namespace MvcPet.Models
 
     [Display(Name = "Espécie")]
     public string species { get; set; } //espécie
-    
+
     [Display(Name = "Raça")]
     public string breed { get; set; } //raça
 
     [Display(Name = "Descrição do Pet")]
     public string description { get; set; } //descrição
 
-    public string image {get;set;}
+    [Display(Name = "Imagem")]
+    public string image { get; set; }
 
-    [Display(Name = "Data do Cadastro")]
+    [Display(Name = "Cadastrado em")]
     [DataType(DataType.Date)]
     public DateTime created { get; set; }
 
-  [Display(Name = "Doador")]
+    [Display(Name = "Doador")]
     public User donor { get; set; }
   }
 }
