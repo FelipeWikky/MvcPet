@@ -35,16 +35,15 @@ namespace MvcPet.Controllers
     // GET: Pet
     public async Task<IActionResult> Index()
     {
-      List<Pet> listPet = new List<Pet>();
-      var pets = await _context.Pets.ToListAsync();
-      if (pets.Count > 0)
+			var pets = from m in _context.Pets select m;
+			pets = pets.OrderByDescending(s => s.petId);
+			List<Pet> listPet = await pets.ToListAsync();
+      if (listPet.Count > 0)
       {
-				
-        foreach (Pet pet in pets)
+        foreach (Pet pet in listPet)
         {
-					User user = await _context.Users.FirstOrDefaultAsync(u => u.userId == pet.donoruserId);
+          User user = await _context.Users.FirstOrDefaultAsync(u => u.userId == pet.donoruserId);
           pet.donor = user;
-          listPet.Add(pet);
         }
       }
       return View(listPet);
@@ -189,8 +188,21 @@ namespace MvcPet.Controllers
       {
         var pets = from m in _context.Pets select m;
 
-        pets = pets.Where(s => s.donor.userId.Equals(_userManager.GetUserId(User)));
-        return View(await pets.ToListAsync());
+        pets = pets.Where(s => s.donoruserId.Equals(_userManager.GetUserId(User)));
+				pets = pets.OrderByDescending(s => s.petId);
+        // return View(await pets.ToListAsync());
+
+				List<Pet> listPet = await pets.ToListAsync();
+
+				if (listPet.Count > 0)
+				{
+					User user = await _context.Users.FirstOrDefaultAsync(u => u.userId == _userManager.GetUserId(User));
+					foreach (Pet pet in listPet)
+					{
+						pet.donor = user;
+					}
+				}
+				return View(listPet);
       }
       else
       {

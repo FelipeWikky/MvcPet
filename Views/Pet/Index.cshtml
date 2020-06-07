@@ -17,7 +17,7 @@
 				<h5 class="card-header">@item.species - @item.breed</h5>
 
 				<div class="card-body">
-					<p class="card-text" style="color: #7f7f7f;"> @item.description. </p>
+					<p class="card-text" style="color: #7f7f7f; max-lines:1;"> @item.description. </p>
 
 					<p>
 						<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -27,16 +27,15 @@
 					<div class="collapse" id="collapseExample">
 						<div class="card card-body">
 							<img src="@item.image" alt="" width="100px" height="100px">
+							<a href="@item.image" target="_blank">Visualizar em tamanho real</a>
 						</div>
 					</div>
-
-					<a href="@item.image" target="_blank">Preview do Pet - Imagem</a>
 
 					<p class="card-text" style="color: #7f7f7f;">
 						Cadastrado em @item.created.ToString().Split(" ")[0]
 					</p>
 
-					<p>
+					<p style="color: #7f7f7f;">
 						Doador: @item.donor.name
 					</p>
 

@@ -1,5 +1,54 @@
+@model IEnumerable<MvcPet.Models.Pet>
+
 @{
   ViewData["Title"] = "Minhas doações";
 }
 
-<h1>Minhas doações</h1>
+<h1>Animais que você cadastrou</h1>
+
+<p>
+  <a asp-action="Create">Cadastrar novo Pet</a>
+</p>
+
+<div class="grid-container">
+	@foreach (var item in Model) {
+		<div class="grid-item">
+			<div class="card">
+				<h5 class="card-header">@item.species - @item.breed</h5>
+
+				<div class="card-body">
+					<p class="card-text" style="color: #7f7f7f;"> @item.description. </p>
+
+					<p>
+						<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+							Preview do Pet - Imagem
+						</a>
+					</p>
+					<div class="collapse" id="collapseExample">
+						<div class="card card-body">
+							<img src="@item.image" alt="" width="100px" height="100px">
+              <a href="@item.image" target="_blank">Visualizar em tamanho real</a>
+
+						</div>
+					</div>
+
+					<p class="card-text" style="color: #7f7f7f;">
+						Cadastrado em @item.created.ToString().Split(" ")[0]
+					</p>
+
+          <p style="color: #7f7f7f;">
+						Doador: @item.donor.name
+					</p>
+
+					<a asp-action="Details" asp-route-id="@item.petId" class="btn btn-primary">Mais informações</a>
+					<br>
+					<td>
+							<a asp-action="Edit" asp-route-id="@item.petId">Edit</a> |
+							<a asp-action="Delete" asp-route-id="@item.petId">Delete</a>
+					</td>
+
+				</div>
+			</div>
+		</div>
+	}
+</div>
