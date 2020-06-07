@@ -20616,6 +20616,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Pet\\MyDonations.cshtml",
+      "TargetPath": "Views\\Pet\\MyDonations.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Csharp\\MvcPet\\Areas\\Identity\\Pages\\Account\\ForgotPassword.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\ForgotPassword.cshtml",
       "FileKind": "mvc"

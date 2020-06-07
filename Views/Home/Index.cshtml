@@ -1,4 +1,6 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@model MvcPet.Models.User
+
+@using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -9,7 +11,8 @@
 
 <div class="text-center">
     @if ( SignInManager.IsSignedIn(User) ) {
-       <h1>Bem vindo @UserManager.GetUserName(User) </h1> 
+       @* <h1>Bem vindo @UserManager.GetUserName(User) </h1>  *@
+       <h1>Bem vindo @Html.DisplayFor(Model => Model.name) </h1>
     } else {
     <h1 class="display-4">Seja Bem vindo ao site</h1>
     }

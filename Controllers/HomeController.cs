@@ -6,21 +6,48 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MvcPet.Models;
+using MvcPet.Data;
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace MvcPet.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly MvcPetContext _context;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            ILogger<HomeController> logger, 
+            MvcPetContext context,
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager)
         {
             _logger = logger;
+            _context = context;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            if ( _signInManager.IsSignedIn(User) ) {
+                var users = from m in _context.Users select m;
+                
+                // users = users.Where( u => u.userId.Equals( _userManager.GetUserId(User) ) );
+
+                // return View(await users.ToListAsync() );
+                var user = await _context.Users.FirstOrDefaultAsync(m => m.userId == _userManager.GetUserId(User) );
+                return View(user);
+            } else {
+                return View();
+            }
         }
 
         public IActionResult About()

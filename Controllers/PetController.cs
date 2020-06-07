@@ -8,15 +8,28 @@ using Microsoft.EntityFrameworkCore;
 using MvcPet.Data;
 using MvcPet.Models;
 
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+
 namespace MvcPet.Controllers
 {
     public class PetController : Controller
     {
         private readonly MvcPetContext _context;
 
-        public PetController(MvcPetContext context)
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public PetController(
+            MvcPetContext context,
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager)
         {
             _context = context;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         // GET: Pet
@@ -149,5 +162,18 @@ namespace MvcPet.Controllers
         {
             return _context.Pets.Any(e => e.petId == id);
         }
+    
+        public async Task<IActionResult> MyDonations(){
+            if ( _signInManager.IsSignedIn(User) ) {
+                var pets = from m in _context.Pets select m;
+
+                pets = pets.Where(s => s.donor.userId.Equals(_userManager.GetUserId(User)) );
+                return View( await pets.ToListAsync() );
+            } else {
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
     }
+
 }

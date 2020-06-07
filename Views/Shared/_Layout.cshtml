@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -11,7 +15,7 @@
 <header>
 	<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
 		<div class="container">
-			<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+			<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"  style="margin-right: 20px;">
 					<img src="https://i.ibb.co/KxcZb1f/icon.png" alt="" srcset="" width="90px" height="40px">
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -21,10 +25,15 @@
 			<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 					<partial name="_LoginPartial" />
 					<ul class="navbar-nav flex-grow-1">
-							<li class="nav-item">
+							<li class="nav-item" style="margin-right: 20px;">
 									<a class="nav-link text-light" asp-area="" asp-controller="Pet" asp-action="Index">Doações</a>
 							</li>
-							<li class="nav-item">
+							@if ( SignInManager.IsSignedIn(User) ) {
+								<li class="nav-item" style="margin-right: 20px;">
+									<a class="nav-link text-light" asp-area="" asp-controller="Pet" asp-action="MyDonations">Minhas Doações</a>
+								</li>
+							}
+							<li class="nav-item" style="margin-right: 20px;">
 									<a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="About">Quem somos</a>
 							</li>
 					</ul>
