@@ -5,7 +5,7 @@ namespace MvcPet.Models
 {
   public class Pet
   {
-    public int PetId { get; set; }
+    public int petId { get; set; }
 
     [Display(Name = "Espécie")]
     public string species { get; set; } //espécie

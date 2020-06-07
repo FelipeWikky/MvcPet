@@ -16,9 +16,6 @@ namespace MvcPet.Areas.Identity.Data
         {
         }
 
-        // public DbSet<User> Users { get; set; }
-        // public DbSet<Pet> Pets { get; set; }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -26,5 +23,8 @@ namespace MvcPet.Areas.Identity.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Pet> Pets { get; set; }
     }
 }

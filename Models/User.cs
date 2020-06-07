@@ -14,7 +14,7 @@ namespace MvcPet.Models
     public string email { get; set; }
 
     [Display(Name = "Telefone")]
-    public string phoneNumber { get; set; }
+    public string phone { get; set; }
 
     public ICollection<Pet> pets {get; set;}
   }
