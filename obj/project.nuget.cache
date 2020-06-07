@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kDjGz0sQG0LIrU0TsrFDLKnLqtLuVqN+dy0hFQGCxCpAqqfFrfmY0YkIalSj3fpXAt4BleISc/nfLpFZZDJlpQ==",
+  "dgSpecHash": "46EoZ5Q5VaVoyrMkyBD/08oYsBZG2K3f9XT3BWS+lHHe7O+4SoB8asbfWqq87Qc6Vuo2LIdLPBj5T7/NYskJrw==",
   "success": true,
   "projectFilePath": "E:\\Csharp\\MvcPet\\MvcPet.csproj",
   "expectedPackageFiles": [
@@ -174,7 +174,8 @@
     "C:\\Users\\Wikky\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Wikky\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Wikky\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Wikky\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\Wikky\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\Wikky\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
   ],
   "logs": []
 }
