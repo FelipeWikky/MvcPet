@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MvcPet.Models;
 
 namespace MvcPet.Areas.Identity.Data
 {
@@ -14,6 +15,9 @@ namespace MvcPet.Areas.Identity.Data
             : base(options)
         {
         }
+
+        // public DbSet<User> Users { get; set; }
+        // public DbSet<Pet> Pets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

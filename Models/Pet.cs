@@ -22,7 +22,7 @@ namespace MvcPet.Models
     [DataType(DataType.Date)]
     public DateTime created { get; set; }
 
-  // [Display(Name = "Doador")]
-  //   public User donor { get; set; }
+  [Display(Name = "Doador")]
+    public User donor { get; set; }
   }
 }
