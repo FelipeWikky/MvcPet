@@ -8,6 +8,15 @@
 
 <hr>
 
+<form asp-action="Index">
+	<div style="display:flex; flex-direction: row;">
+		<input type="text" class="form-control" style="max-width: 20%; margin-right: 10px;">
+		<button type="submit" class="btn btn-outline-primary">Pesquisar</button>
+	</div>
+</form>
+
+<hr>
+
 <div class="grid-container">
 	@foreach (var item in Model) {
 		<div class="grid-item">

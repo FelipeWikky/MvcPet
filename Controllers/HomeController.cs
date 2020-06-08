@@ -44,7 +44,10 @@ namespace MvcPet.Controllers
 
                 // return View(await users.ToListAsync() );
                 var user = await _context.Users.FirstOrDefaultAsync(m => m.userId == _userManager.GetUserId(User) );
-                return View(user);
+                UserPetViewModel vm = new UserPetViewModel();
+                vm.User = user;
+                // return View(user);
+                return View(vm);
             } else {
                 return View();
             }

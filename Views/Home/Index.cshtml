@@ -1,4 +1,4 @@
-﻿@model MvcPet.Models.User
+﻿@model MvcPet.Models.UserPetViewModel
 
 @using Microsoft.AspNetCore.Identity
 
@@ -11,11 +11,18 @@
 
 <div class="text-center">
     @if ( SignInManager.IsSignedIn(User) ) {
-       @* <h1>Bem vindo @UserManager.GetUserName(User) </h1>  *@
-       <h1>Bem vindo @Html.DisplayFor(Model => Model.name) </h1>
-    } else {
-    <h1 class="display-4">Seja Bem vindo ao site</h1>
+			@* <h1>Bem vindo @UserManager.GetUserName(User) </h1>  *@
+			<h3>Bem vindo @Html.DisplayFor(Model => Model.User.name) </h3>
+    } 
+    else 
+    {
+			<h3 class="display-4">Seja Bem vindo ao site</h3>
     }
+
+    <div>
+			<h2>Pets do dia!</h2>
+			<span>Cadastrado(s) hoje (@DateTime.Today.ToString().Split(" ")[0])</span>
+    </div>
 </div>
 
 
