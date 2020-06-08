@@ -1,10 +1,10 @@
 @model IEnumerable<MvcPet.Models.Pet>
 
 @{
-  ViewData["Title"] = "Minhas doações";
+  ViewData["Title"] = "Minhas doações (" + Model.Count() + ")";
 }
 
-<h1>Animais que você cadastrou</h1>
+<h4>Animais que você você possui cadastrado atualmente.</h4>
 
 <p>
   <a asp-action="Create">Cadastrar novo Pet</a>
@@ -14,13 +14,14 @@
 	@foreach (var item in Model) {
 		<div class="grid-item">
 			<div class="card">
-				<h5 class="card-header">@item.species - @item.breed</h5>
+				<h5 class="card-header">@item.species</h5>
 
 				<div class="card-body">
+					<h4 style="font-weight:bold;">@item.breed</h4>
 					<p class="card-text" style="color: #7f7f7f;"> @item.description. </p>
 
 					<p>
-						<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+						<a class="btn btn-outline-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 							Preview do Pet - Imagem
 						</a>
 					</p>

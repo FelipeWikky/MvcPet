@@ -1,13 +1,12 @@
 @model MvcPet.Models.Pet
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Atualizar Pet";
 }
 
-<h1>Edit</h1>
-
-<h4>Pet</h4>
+<h4>Alterar informações do Pet</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -29,24 +28,25 @@
                 <span asp-validation-for="description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="image" class="control-label"></label>
+                <label asp-for="image" class="control-label">Link para Imagem</label>
                 <input asp-for="image" class="form-control" />
                 <span asp-validation-for="image" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @* <div class="form-group">
                 <label asp-for="created" class="control-label"></label>
                 <input asp-for="created" class="form-control" />
                 <span asp-validation-for="created" class="text-danger"></span>
-            </div>
+            </div> *@
+            <input type="hidden" asp-for="created" />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Confirmar alterações" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="MyDonations">Voltar</a>
 </div>
 
 @section Scripts {

@@ -64,6 +64,9 @@ namespace MvcPet.Controllers
         return NotFound();
       }
 
+      User user = await _context.Users.FirstOrDefaultAsync( u => u.userId == pet.donoruserId);
+      pet.donor = user;
+
       return View(pet);
     }
 
@@ -78,17 +81,18 @@ namespace MvcPet.Controllers
     // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("petId,species,breed,description,image,created")] Pet pet)
+    public async Task<IActionResult> Create([Bind("petId,species,breed,description,image")] Pet pet)
     {
       if (ModelState.IsValid)
       {
-        // User user = new User();
-        // user.userId = _userManager.GetUserId(User);
-
+      
+        //Adicionar Usuário Doador
         User user = await _context.Users
           .FirstOrDefaultAsync(u => u.userId == _userManager.GetUserId(User));
-
         pet.donor = user;
+
+        //Adicionar created atual
+        pet.created = DateTime.Today;
 
         _context.Add(pet);
         await _context.SaveChangesAsync();
@@ -129,6 +133,15 @@ namespace MvcPet.Controllers
       {
         try
         {
+          //recuperar createdDate do Pet
+          // Pet oldPet = await _context.Pets.FirstOrDefaultAsync(p => p.petId == id);
+          // pet.created = oldPet.created;
+
+          //Adicionar Usuário Doador
+          User user = await _context.Users
+            .FirstOrDefaultAsync(u => u.userId == _userManager.GetUserId(User));
+          pet.donor = user;
+
           _context.Update(pet);
           await _context.SaveChangesAsync();
         }
@@ -143,7 +156,7 @@ namespace MvcPet.Controllers
             throw;
           }
         }
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(MyDonations));
       }
       return View(pet);
     }
@@ -163,6 +176,10 @@ namespace MvcPet.Controllers
         return NotFound();
       }
 
+      if (pet.donoruserId != _userManager.GetUserId(User)) {
+        return RedirectToAction(nameof(MyDonations));
+      }
+
       return View(pet);
     }
 
@@ -174,7 +191,7 @@ namespace MvcPet.Controllers
       var pet = await _context.Pets.FindAsync(id);
       _context.Pets.Remove(pet);
       await _context.SaveChangesAsync();
-      return RedirectToAction(nameof(Index));
+      return RedirectToAction(nameof(MyDonations));
     }
 
     private bool PetExists(int id)
