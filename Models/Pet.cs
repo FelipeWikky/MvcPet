@@ -23,6 +23,12 @@ namespace MvcPet.Models
     [DataType(DataType.Date)]
     public DateTime created { get; set; }
 
+    [Display(Name="UF")]
+    public string uf {get;set;}
+
+    [Display(Name="Cidade")]
+    public string city {get;set;}
+
     [Display(Name = "Doador")]
     public User donor { get; set; }
 

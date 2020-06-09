@@ -13,6 +13,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
+using System.Web;
+using System.Net;
+using System.IO;
+using System.Text;
+using System.Runtime.Serialization.Json;
+
+using Newtonsoft.Json;
+
 namespace MvcPet.Controllers
 {
   public class PetController : Controller
@@ -73,6 +81,34 @@ namespace MvcPet.Controllers
     // GET: Pet/Create
     public IActionResult Create()
     {
+
+      //recebendo estados de uma api
+      string url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/";
+      // HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
+      // WebResponse response = request.GetResponse();
+
+      var request = WebRequest.CreateHttp(url);
+      request.Method = "GET";
+      request.UserAgent = "RequisicaoWebDemo";
+
+      using (var response = request.GetResponse())
+      {
+          var streamDados = response.GetResponseStream();
+          StreamReader reader = new StreamReader(streamDados);
+          object objResponse = reader.ReadToEnd();
+
+          var ufs = JsonConvert.DeserializeObject<UF[]>(objResponse.ToString());
+          ViewBag.ufs = ufs;
+          // foreach(UF uf in ufs){
+          //   Console.WriteLine(uf.nome);
+          // }
+          // Console.WriteLine( ufs.ToString() );
+
+          streamDados.Close();
+          response.Close();
+      }
+
+
       return View();
     }
 

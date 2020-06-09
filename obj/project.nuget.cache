@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "46EoZ5Q5VaVoyrMkyBD/08oYsBZG2K3f9XT3BWS+lHHe7O+4SoB8asbfWqq87Qc6Vuo2LIdLPBj5T7/NYskJrw==",
+  "dgSpecHash": "xgoOpHN1kaxh4yvY9WX5J3T9W2wRJSDWkeWMtYbzPBkcTffS0/PWiQVBTPQwQ+lPXbRSORT42mAXSeiblU0/Hw==",
   "success": true,
   "projectFilePath": "E:\\Csharp\\MvcPet\\MvcPet.csproj",
   "expectedPackageFiles": [
@@ -63,7 +63,7 @@
     "C:\\Users\\Wikky\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\Wikky\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\Wikky\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
-    "C:\\Users\\Wikky\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\Wikky\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\Wikky\\.nuget\\packages\\nuget.frameworks\\4.7.0\\nuget.frameworks.4.7.0.nupkg.sha512",
     "C:\\Users\\Wikky\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\Wikky\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
