@@ -43,9 +43,9 @@ namespace MvcPet.Controllers
     // GET: Pet
     public async Task<IActionResult> Index()
     {
-			var pets = from m in _context.Pets select m;
-			pets = pets.OrderByDescending(s => s.petId);
-			List<Pet> listPet = await pets.ToListAsync();
+      var pets = from m in _context.Pets select m;
+      pets = pets.OrderByDescending(s => s.petId);
+      List<Pet> listPet = await pets.ToListAsync();
       if (listPet.Count > 0)
       {
         foreach (Pet pet in listPet)
@@ -72,7 +72,7 @@ namespace MvcPet.Controllers
         return NotFound();
       }
 
-      User user = await _context.Users.FirstOrDefaultAsync( u => u.userId == pet.donoruserId);
+      User user = await _context.Users.FirstOrDefaultAsync(u => u.userId == pet.donoruserId);
       pet.donor = user;
 
       return View(pet);
@@ -93,19 +93,19 @@ namespace MvcPet.Controllers
 
       using (var response = request.GetResponse())
       {
-          var streamDados = response.GetResponseStream();
-          StreamReader reader = new StreamReader(streamDados);
-          object objResponse = reader.ReadToEnd();
+        var streamDados = response.GetResponseStream();
+        StreamReader reader = new StreamReader(streamDados);
+        object objResponse = reader.ReadToEnd();
 
-          var ufs = JsonConvert.DeserializeObject<UF[]>(objResponse.ToString());
-          ViewBag.ufs = ufs;
-          // foreach(UF uf in ufs){
-          //   Console.WriteLine(uf.nome);
-          // }
-          // Console.WriteLine( ufs.ToString() );
+        var ufs = JsonConvert.DeserializeObject<UF[]>(objResponse.ToString());
+        ViewBag.ufs = ufs;
+        // foreach(UF uf in ufs){
+        //   Console.WriteLine(uf.nome);
+        // }
+        // Console.WriteLine( ufs.ToString() );
 
-          streamDados.Close();
-          response.Close();
+        streamDados.Close();
+        response.Close();
       }
 
 
@@ -117,11 +117,11 @@ namespace MvcPet.Controllers
     // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("petId,species,breed,description,image")] Pet pet)
+    public async Task<IActionResult> Create([Bind("petId,species,breed,description,image, uf")] Pet pet)
     {
       if (ModelState.IsValid)
       {
-      
+
         //Adicionar Usuário Doador
         User user = await _context.Users
           .FirstOrDefaultAsync(u => u.userId == _userManager.GetUserId(User));
@@ -212,7 +212,8 @@ namespace MvcPet.Controllers
         return NotFound();
       }
 
-      if (pet.donoruserId != _userManager.GetUserId(User)) {
+      if (pet.donoruserId != _userManager.GetUserId(User))
+      {
         return RedirectToAction(nameof(MyDonations));
       }
 
@@ -242,20 +243,20 @@ namespace MvcPet.Controllers
         var pets = from m in _context.Pets select m;
 
         pets = pets.Where(s => s.donoruserId.Equals(_userManager.GetUserId(User)));
-				pets = pets.OrderByDescending(s => s.petId);
+        pets = pets.OrderByDescending(s => s.petId);
         // return View(await pets.ToListAsync());
 
-				List<Pet> listPet = await pets.ToListAsync();
+        List<Pet> listPet = await pets.ToListAsync();
 
-				if (listPet.Count > 0)
-				{
-					User user = await _context.Users.FirstOrDefaultAsync(u => u.userId == _userManager.GetUserId(User));
-					foreach (Pet pet in listPet)
-					{
-						pet.donor = user;
-					}
-				}
-				return View(listPet);
+        if (listPet.Count > 0)
+        {
+          User user = await _context.Users.FirstOrDefaultAsync(u => u.userId == _userManager.GetUserId(User));
+          foreach (Pet pet in listPet)
+          {
+            pet.donor = user;
+          }
+        }
+        return View(listPet);
       }
       else
       {
@@ -263,6 +264,12 @@ namespace MvcPet.Controllers
       }
     }
 
+    public ActionResult GetCitys(string uf)
+    {
+        var json = Json( City.getCitys(uf) );
+
+        return json;
+    }
   }
 
 }
