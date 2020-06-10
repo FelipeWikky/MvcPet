@@ -26,7 +26,6 @@ namespace MvcPet.Controllers
   public class PetController : Controller
   {
     private readonly MvcPetContext _context;
-
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly UserManager<IdentityUser> _userManager;
 
@@ -88,37 +87,42 @@ namespace MvcPet.Controllers
     }
 
     // GET: Pet/Create
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
-
-      //recebendo estados de uma api
-      string url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/";
-      // HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
-      // WebResponse response = request.GetResponse();
-
-      var request = WebRequest.CreateHttp(url);
-      request.Method = "GET";
-      request.UserAgent = "RequisicaoWebDemo";
-
-      using (var response = request.GetResponse())
-      {
-        var streamDados = response.GetResponseStream();
-        StreamReader reader = new StreamReader(streamDados);
-        object objResponse = reader.ReadToEnd();
-
-        var ufs = JsonConvert.DeserializeObject<UF[]>(objResponse.ToString());
-        ViewBag.ufs = ufs;
-        // foreach(UF uf in ufs){
-        //   Console.WriteLine(uf.nome);
-        // }
-        // Console.WriteLine( ufs.ToString() );
-
-        streamDados.Close();
-        response.Close();
-      }
-
+      var ufs = await _context.Ufs.ToListAsync();
+      ViewBag.ufs = ufs;
 
       return View();
+
+      
+      // //recebendo estados de uma api
+      // string url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/";
+      // // HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
+      // // WebResponse response = request.GetResponse();
+
+      // var request = WebRequest.CreateHttp(url);
+      // request.Method = "GET";
+      // request.UserAgent = "RequisicaoWebDemo";
+
+      // using (var response = request.GetResponse())
+      // {
+      //   var streamDados = response.GetResponseStream();
+      //   StreamReader reader = new StreamReader(streamDados);
+      //   object objResponse = reader.ReadToEnd();
+
+      //   var ufs = JsonConvert.DeserializeObject<UF[]>(objResponse.ToString());
+      //   ViewBag.ufs = ufs;
+      //   // foreach(UF uf in ufs){
+      //   //   Console.WriteLine(uf.nome);
+      //   // }
+      //   // Console.WriteLine( ufs.ToString() );
+
+      //   streamDados.Close();
+      //   response.Close();
+      // }
+      // return View();
+
+
     }
 
     // POST: Pet/Create

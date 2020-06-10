@@ -4,8 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MvcPet.Models {
   public class UF {
-    public int id {get;set;}
+
+    [Key]
     public string sigla {get;set;}
+    [Display(Name="UF")]
     public string nome {get;set;}
   }
 }

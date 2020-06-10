@@ -1,0 +1,8 @@
+@model IEnumerable<MvcPet.Models.Animalclass>
+
+<div>
+  @foreach (var item in Model)
+  {
+    <strong>@item.id</strong> @item.name
+  }
+</div>

@@ -3,17 +3,28 @@
 
 // Write your JavaScript code.
 
-async function getCities(){
-  var select = document.getElementById('ufs');
+async function getCities() {
+  $("#cities").empty();
 
-  const request = new Request(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/BA/municipios`);
+  var o = new Option("Carregando...", "none");
+  $(o).html("Carregando...");
+  $("#cities").append(o);
 
-  try {
-    const response = await fetch(request);
-    console.log(response.json() );
+  var uf = $('#ufs').val();
 
-  }catch(err){
-    alert(err);
-  }
-  
+  const request = new Request(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`);
+
+  fetch(request)
+    .then(response => {
+      response.json()
+        .then(data => {
+          $("#cities").empty();
+          data.forEach(element => {
+            var o = new Option(element.nome, element.nome);
+            $(o).html(element.nome);
+            $("#cities").append(o);
+          });
+        })
+    })
 }
+
