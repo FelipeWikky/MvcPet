@@ -33,9 +33,12 @@ namespace MvcPet.Models
     [Display(Name = "Doador")]
     public User donor { get; set; }
 
+    [NotMapped]
     public string donoruserId {get;set;}
 
+    public Animalclass animal {get;set;}
+
     [NotMapped]
-    public int animalClass {get;set;}
+    public int animalid {get;set;}
   }
 }

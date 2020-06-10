@@ -41,7 +41,7 @@ namespace MvcPet.Controllers
     }
 
     // GET: Pet
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int filter)
     {
       var animals = from a in _context.Animals select a;
       ViewBag.Animals = await animals.ToListAsync();
