@@ -8,10 +8,11 @@
 
 <hr>
 
-<form asp-action="Index">
+<form asp-controller="Pet" asp-action="Index">
 	<div style="display:flex; flex-direction: row;">
 		@* <input type="text" class="form-control" style="max-width: 20%; margin-right: 10px;"> *@
 		<select name="filter" id="filter" class="form-control" style="max-width: 15%; margin-right: 30px;">
+			<option value="0">Todos</option>
 			@foreach (Animalclass an in ViewBag.Animals)
 			{
 				<option value="@an.id">@an.name</option>		

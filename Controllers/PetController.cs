@@ -43,11 +43,17 @@ namespace MvcPet.Controllers
     // GET: Pet
     public async Task<IActionResult> Index(int filter)
     {
+
       var animals = from a in _context.Animals select a;
       ViewBag.Animals = await animals.ToListAsync();
 
       var pets = from m in _context.Pets select m;
       pets = pets.OrderByDescending(s => s.petId);
+
+      if ( filter > 0 ) {
+        pets = pets.Where(p => p.animalid == filter);
+      }
+
       List<Pet> listPet = await pets.ToListAsync();
       if (listPet.Count > 0)
       {
