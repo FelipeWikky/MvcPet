@@ -11,15 +11,11 @@
 <form asp-action="Index">
 	<div style="display:flex; flex-direction: row;">
 		@* <input type="text" class="form-control" style="max-width: 20%; margin-right: 10px;"> *@
-		<select name="filter" id="filter" class="form-control" style="max-width: 10%; margin-right: 30px;">
-			<option value="">Mamíferos</option>
-			<option value="">Aves</option>
-			<option value="">Répteis</option>
-			<option value="">Anfíbios</option>
-			<option value="">Peixes</option>
-			<option value="">Crustáceos</option>
-			<option value="">Aracnídeos</option>
-			<option value="">Outros</option>
+		<select name="filter" id="filter" class="form-control" style="max-width: 15%; margin-right: 30px;">
+			@foreach (Animalclass an in ViewBag.Animals)
+			{
+				<option value="@an.id">@an.name</option>		
+			}
 		</select>
 		<button type="submit" class="btn btn-outline-primary">Filtrar</button>
 	</div>

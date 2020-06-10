@@ -43,6 +43,9 @@ namespace MvcPet.Controllers
     // GET: Pet
     public async Task<IActionResult> Index()
     {
+      var animals = from a in _context.Animals select a;
+      ViewBag.Animals = await animals.ToListAsync();
+
       var pets = from m in _context.Pets select m;
       pets = pets.OrderByDescending(s => s.petId);
       List<Pet> listPet = await pets.ToListAsync();

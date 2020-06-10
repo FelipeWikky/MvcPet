@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MvcPet.Models
 {
@@ -33,5 +34,8 @@ namespace MvcPet.Models
     public User donor { get; set; }
 
     public string donoruserId {get;set;}
+
+    [NotMapped]
+    public int animalClass {get;set;}
   }
 }
