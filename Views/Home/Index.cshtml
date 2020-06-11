@@ -12,16 +12,19 @@
 <div class="text-center">
     @if ( SignInManager.IsSignedIn(User) ) {
 			@* <h1>Bem vindo @UserManager.GetUserName(User) </h1>  *@
-			<h3>Bem vindo @Html.DisplayFor(Model => Model.User.name) </h3>
+            string firstName = Model.User.name.Split(" ")[0];
+			<h3>Olá @firstName </h3>
+            <h5>Pronto pra adotar um Pet hoje?</h5>
+            <hr>
     } 
     else 
     {
-			<h3 class="display-4">Seja Bem vindo ao site</h3>
+			<h3 class="display-4">Seja Bem vindo!</h3>
     }
 
     <div>
 			<h2>Pets do dia!</h2>
-			<span>Cadastrado(s) hoje (@DateTime.Today.ToString().Split(" ")[0])</span>
+			<small>Cadastrado(s) hoje (@DateTime.Today.ToString().Split(" ")[0])</small>
     </div>
 </div>
 

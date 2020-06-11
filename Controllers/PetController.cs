@@ -46,6 +46,13 @@ namespace MvcPet.Controllers
       var animals = from a in _context.Animals select a;
       ViewBag.Animals = await animals.ToListAsync();
 
+      foreach(Animalclass an in ViewBag.Animals){
+        if (an.id == filter) {
+          ViewBag.filter = an.name;
+          break;
+        }
+      }
+
       var pets = from m in _context.Pets select m;
       pets = pets.OrderByDescending(s => s.petId);
 
