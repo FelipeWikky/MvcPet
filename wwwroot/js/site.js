@@ -4,6 +4,7 @@
 // Write your JavaScript code.
 
 async function getCities() {
+  console.log('request cities');
   $("#cities").empty();
 
   var o = new Option("Carregando...", "none");

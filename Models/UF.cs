@@ -7,6 +7,7 @@ namespace MvcPet.Models {
 
     [Key]
     public string sigla {get;set;}
+    
     [Display(Name="UF")]
     public string nome {get;set;}
   }

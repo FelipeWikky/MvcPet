@@ -14,6 +14,7 @@ namespace MvcPet.Models
     public static void Initialize(IServiceProvider serviceProvider)
     {
       seedClassAnimals(serviceProvider);
+      seedUfs(serviceProvider);
     }
 
     private static void seedClassAnimals(IServiceProvider serviceProvider)

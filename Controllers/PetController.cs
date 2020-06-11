@@ -90,7 +90,10 @@ namespace MvcPet.Controllers
     public async Task<IActionResult> Create()
     {
       var ufs = await _context.Ufs.ToListAsync();
+      Console.WriteLine(ufs[0].sigla);
       ViewBag.ufs = ufs;
+      var animals = await _context.Animals.ToListAsync();
+      ViewBag.animals = animals;
 
       return View();
 
@@ -130,7 +133,7 @@ namespace MvcPet.Controllers
     // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("petId,species,breed,description,image, uf")] Pet pet)
+    public async Task<IActionResult> Create([Bind("petId,animalid,species,breed,description,image,uf,city")] Pet pet)
     {
       if (ModelState.IsValid)
       {
