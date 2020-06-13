@@ -26,6 +26,8 @@ using Newtonsoft.Json;
 
 namespace MvcPet.Controllers
 {
+  
+  [Authorize(Roles = "Admin")]
   public class AnimalControler : Controller
   {
     private readonly MvcPetContext _context;

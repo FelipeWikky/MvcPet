@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -10,18 +11,23 @@ using MvcPet.Areas.Identity.Data;
 [assembly: HostingStartup(typeof(MvcPet.Areas.Identity.IdentityHostingStartup))]
 namespace MvcPet.Areas.Identity
 {
-    public class IdentityHostingStartup : IHostingStartup
+  public class IdentityHostingStartup : IHostingStartup
+  {
+    public void Configure(IWebHostBuilder builder)
     {
-        public void Configure(IWebHostBuilder builder)
-        {
-            builder.ConfigureServices((context, services) => {
-                services.AddDbContext<MvcPetIdentityDbContext>(options =>
-                    options.UseSqlite(
-                        context.Configuration.GetConnectionString("MvcPetIdentityDbContextConnection")));
+      builder.ConfigureServices((context, services) =>
+      {
+        services.AddDbContext<MvcPetIdentityDbContext>(options =>
+            options.UseSqlite(
+                context.Configuration.GetConnectionString("MvcPetIdentityDbContextConnection")));
 
-                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<MvcPetIdentityDbContext>();
-            });
-        }
+        services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+          .AddRoles<IdentityRole>()
+          .AddEntityFrameworkStores<MvcPetIdentityDbContext>();
+          
+        // services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+        //   .AddEntityFrameworkStores<MvcPetIdentityDbContext>();
+      });
     }
+  }
 }

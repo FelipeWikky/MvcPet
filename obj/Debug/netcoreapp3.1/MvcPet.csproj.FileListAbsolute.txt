@@ -223,3 +223,8 @@ E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Pet\Index.cshtml.g.cs
 E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Home\About.cshtml.g.cs
 E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Pet\MyDonations.cshtml.g.cs
 E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Animal\Index.cshtml.g.cs
+E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Role\Create.cshtml.g.cs
+E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Role\Index.cshtml.g.cs
+E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Role\Edit.cshtml.g.cs
+E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Role\Users.cshtml.g.cs
+E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_NotifyMessage.cshtml.g.cs

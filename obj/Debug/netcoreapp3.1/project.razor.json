@@ -20566,6 +20566,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Shared\\_NotifyMessage.cshtml",
+      "TargetPath": "Views\\Shared\\_NotifyMessage.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Csharp\\MvcPet\\Areas\\Identity\\Pages\\Account\\ResetPasswordConfirmation.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\ResetPasswordConfirmation.cshtml",
       "FileKind": "mvc"
@@ -20586,6 +20591,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Role\\Edit.cshtml",
+      "TargetPath": "Views\\Role\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Csharp\\MvcPet\\Areas\\Identity\\Pages\\Account\\_StatusMessage.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\_StatusMessage.cshtml",
       "FileKind": "mvc"
@@ -20603,6 +20613,11 @@
     {
       "FilePath": "e:\\Csharp\\MvcPet\\Areas\\Identity\\Pages\\Account\\Manage\\ResetAuthenticator.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\ResetAuthenticator.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Role\\Create.cshtml",
+      "TargetPath": "Views\\Role\\Create.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20696,6 +20711,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Role\\Index.cshtml",
+      "TargetPath": "Views\\Role\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Csharp\\MvcPet\\Areas\\Identity\\Pages\\Account\\LoginWithRecoveryCode.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\LoginWithRecoveryCode.cshtml",
       "FileKind": "mvc"
@@ -20738,6 +20758,11 @@
     {
       "FilePath": "e:\\Csharp\\MvcPet\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Role\\Users.cshtml",
+      "TargetPath": "Views\\Role\\Users.cshtml",
       "FileKind": "mvc"
     },
     {

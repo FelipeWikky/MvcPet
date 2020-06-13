@@ -1,0 +1,27 @@
+@model MvcPet.Models.Message
+
+@{
+  switch(Model.statusType) {
+    case 1:
+      <div class="alert alert-success" role="alert">
+        @Model.statusMessage
+      </div>
+      break;
+    case 2:
+      <div class="alert alert-danger" role="alert">
+        @Model.statusMessage 
+      </div>
+      break;
+    case 3:
+      <div class="alert alert-danger" role="alert">
+        @Model.statusMessage 
+      </div>
+      break;
+
+    default:
+      <div>
+      </div>
+      break;
+  }
+
+}

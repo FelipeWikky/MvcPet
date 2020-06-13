@@ -1,0 +1,45 @@
+@using Microsoft.AspNetCore.Identity
+@using MvcPet.ViewModels
+
+@model RoleViewModel
+
+@{
+  ViewData["Title"] = "Users Role";
+}
+
+<h2>Usuários vinculados ao Perfil @ViewBag.Role</h2>
+
+<hr>
+<h4>Cadastrar Usuário nesta Role</h4>
+<small>Informe o E-mail do Usuário</small>
+
+<form asp-action="UserAdd" method="POST">
+  <div class="form-group">
+    <input type="hidden" name="role" asp-for="roleName" >
+    <div class="row">
+      <input type="text" placeholder="Informe o E-mail" class="form-control" name="email" style="max-width: 30%; margin-right: 10px;">
+      <button class="btn btn-outline-success" type="submit">Inserir Usuário</button>
+    </div>
+  </div>
+</form>
+
+<hr>
+
+@if ( Model.Users.Any() ) {
+  foreach (User user in Model.Users)
+  {
+    <div class="card">
+      <div class="card-header">@user.name - @user.email</div>
+      <div class="card-footer">
+        <form asp-action="UserRemove" method="post">
+          <input type="hidden" name="role" asp-for="roleName" >
+          <input type="hidden" name="email" asp-for="@user.email" > 
+          <button class=" btn btn-danger button-link" type="submit">Remover Usuário</button>
+        </form>
+      </div>
+    </div>   
+  }
+}else {
+  <h3>Nenhum Usuário encontrado nesta Role</h3>
+}
+

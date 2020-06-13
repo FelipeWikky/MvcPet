@@ -1,0 +1,42 @@
+@using Microsoft.AspNetCore.Identity
+
+@model IEnumerable<IdentityRole>
+
+@{
+  ViewData["Title"] = "Perfil";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr>
+<a  asp-area="" asp-controller="Role" asp-action="Create">Criar Novo Perfil</a>
+<hr>
+
+@if ( Model.Any() ) {
+  foreach(var item in Model) {
+    <div class="card">
+      <div class="card-header">@item.Name</div>
+      <div class="card-footer">
+        @* <a 
+          asp-controller="Role" 
+          asp-action="Edit"
+          asp-route-id="@item.Id"
+          class="btn btn-outline-primary" 
+          style="margin-right: 10px;"
+        >
+          Editar
+        </a> *@
+        <a asp-controller="Role" asp-action="Users" asp-route-id="@item.Id" class="btn btn-outline-primary" style="margin-right: 10px;">
+          Usuários
+        </a>
+        <a href="#" class="btn btn-outline-danger">Excluir</a>
+      </div>
+    </div>
+    <br>
+  }
+} else {
+  <h3>
+    Não foram encontrado Perfis. 
+    <a  asp-area="" asp-controller="Role" asp-action="Create">Cadastre um novo</a>
+  </h3>
+  
+}
