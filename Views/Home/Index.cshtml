@@ -9,23 +9,152 @@
     ViewData["Title"] = "Início";
 }
 
-<div class="text-center">
-    @if ( SignInManager.IsSignedIn(User) ) {
-			@* <h1>Bem vindo @UserManager.GetUserName(User) </h1>  *@
-            string firstName = Model.User.name.Split(" ")[0];
-			<h3>Olá @firstName </h3>
-            <h5>Pronto pra adotar um Pet hoje?</h5>
-            <hr>
-    } 
-    else 
-    {
-			<h3 class="display-4">Seja Bem vindo!</h3>
-    }
+<style>
+  div.grid-container {
+    display: grid;
 
-    <div>
-			<h2>Pets do dia!</h2>
-			<small>Cadastrado(s) hoje (@DateTime.Today.ToString().Split(" ")[0])</small>
-    </div>
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 20px;
+    row-gap: 20px;
+  };
+
+  div.grid-item {
+    width: auto;
+  };
+
+	span.arrow{
+		color: #000;
+		font-size: 30px;
+		font-weight: bold;
+		text-align: center;
+	};
+</style>
+
+<div class="text-center">
+	@if ( SignInManager.IsSignedIn(User) ) {
+		@* <h1>Bem vindo @UserManager.GetUserName(User) </h1>  *@
+					string firstName = Model.User.name.Split(" ")[0];
+		<h3>Olá @firstName </h3>
+					<h5>Pronto pra adotar um Pet hoje?</h5>
+					<hr>
+	} 
+	else 
+	{
+		<h3 class="display-4">Seja Bem vindo!</h3>
+	}
+
+	<div>
+		<h2>Pets do dia!</h2>
+		<small>Cadastrado(s) hoje (@DateTime.Today.ToString().Split(" ")[0])</small>
+
+		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				@{
+					int count = 0;
+					for(int i =0; i < Model.Pets.Count(); i++){
+						if (count == 0) {
+							<li data-target="#carouselExampleIndicators" data-slide-to="@count" class="active"></li>
+							count++;
+							continue;
+						}
+						<li data-target="#carouselExampleIndicators" data-slide-to="@count"></li>
+						count++;
+					}
+				}
+			</ol>
+			<br><br>
+			
+			<div class="carousel-inner">
+				@{
+					bool first = true;
+					foreach(var item in Model.Pets){
+						if (first) {
+							first = false;
+							<div class="carousel-item active">
+								<div class="card" style="margin-bottom: 10px;">
+									<h5 class="card-header">@item.species</h5>
+									<div class="card-body">
+										<h4 style="font-weight:bold;">@item.breed</h4>
+										<p class="card-text" style="color: #7f7f7f; max-lines:1;"> @item.description. </p>
+										<p>
+											<a class="btn btn-outline-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+												Preview do Pet - Imagem
+											</a>
+										</p>
+										<div class="collapse" id="collapseExample">
+											<div class="card card-body">
+												<img src="@item.image" alt="" width="100px" height="100px">
+												<a href="@item.image" target="_blank">Visualizar em tamanho real</a>
+											</div>
+										</div>
+										<p class="card-text" style="color: #7f7f7f;">
+											Cadastrado em @item.created.ToString().Split(" ")[0]
+											<br>
+											@item.uf - @item.city
+										</p>
+										<a asp-controller="Pet" asp-action="Details" asp-route-id="@item.petId" class="btn btn-primary">Mais informações</a>
+										<br>
+									</div>
+								</div>
+							</div>
+						} else {
+							<div class="carousel-item">
+								<div class="card" style="margin-bottom: 10px;">
+									<h5 class="card-header">@item.species</h5>
+									<div class="card-body">
+										<h4 style="font-weight:bold;">@item.breed</h4>
+										<p class="card-text" style="color: #7f7f7f; max-lines:1;"> @item.description. </p>
+										<p>
+											<a class="btn btn-outline-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+												Preview do Pet - Imagem
+											</a>
+										</p>
+										<div class="collapse" id="collapseExample">
+											<div class="card card-body">
+												<img src="@item.image" alt="" width="100px" height="100px">
+												<a href="@item.image" target="_blank">Visualizar em tamanho real</a>
+											</div>
+										</div>
+										<p class="card-text" style="color: #7f7f7f;">
+											Cadastrado em @item.created.ToString().Split(" ")[0]
+											<br>
+											@item.uf - @item.city
+										</p>
+										<a asp-controller="Pet" asp-action="Details" asp-route-id="@item.petId" class="btn btn-primary">Mais informações</a>
+										<br>
+									</div>
+								</div>
+							</div>	
+						}
+					}
+				}
+			</div>
+
+			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+				<span class="arrow carousel-control-prev-icon" aria-hidden="true"> < </span>
+				<span class="sr-only">Próximo</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+				<span class="arrow carousel-control-next-icon" aria-hidden="true"> > </span>
+				<span class="sr-only">Anterior</span>
+			</a>
+		</div>
+
+	</div>
+
+	<br><br><br>
+
+	<div class="card">
+		<div class="card-header">
+			Por que adotar?
+		</div>
+		<div class="card-body">
+			<p>
+
+			</p>
+		</div>
+	</div>
+
 </div>
 
 

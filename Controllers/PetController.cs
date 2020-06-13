@@ -97,7 +97,6 @@ namespace MvcPet.Controllers
     public async Task<IActionResult> Create()
     {
       var ufs = await _context.Ufs.ToListAsync();
-      Console.WriteLine(ufs[0].sigla);
       ViewBag.ufs = ufs;
       var animals = await _context.Animals.ToListAsync();
       ViewBag.animals = animals;
@@ -173,6 +172,12 @@ namespace MvcPet.Controllers
       {
         return NotFound();
       }
+
+      var animals = await _context.Animals.ToListAsync();
+      ViewBag.animals = animals;
+      var ufs = await _context.Ufs.ToListAsync();
+      ViewBag.ufs = ufs;
+
       return View(pet);
     }
 
@@ -181,7 +186,8 @@ namespace MvcPet.Controllers
     // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("petId,species,breed,description,image,created")] Pet pet)
+    //public async Task<IActionResult> Edit(int id, [Bind("petId,species,breed,description,image,created")] Pet pet)
+    public async Task<IActionResult> Edit(int id, [Bind("petId,animalid,species,breed,description,image,created,uf,city")] Pet pet)
     {
       if (id != pet.petId)
       {
@@ -192,11 +198,7 @@ namespace MvcPet.Controllers
       {
         try
         {
-          //recuperar createdDate do Pet
-          // Pet oldPet = await _context.Pets.FirstOrDefaultAsync(p => p.petId == id);
-          // pet.created = oldPet.created;
-
-          //Adicionar Usuário Doador
+          //recuperar Usuário
           User user = await _context.Users
             .FirstOrDefaultAsync(u => u.userId == _userManager.GetUserId(User));
           pet.donor = user;
@@ -287,12 +289,13 @@ namespace MvcPet.Controllers
       }
     }
 
-    public ActionResult GetCitys(string uf)
+    [HttpGet]
+    public IActionResult Donate(string id)
     {
-        var json = Json( City.getCitys(uf) );
-
-        return json;
+      int petId = Convert.ToInt32(id);
+      return View();
     }
+
   }
 
 }

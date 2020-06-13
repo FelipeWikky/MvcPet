@@ -12,6 +12,7 @@ async function getCities() {
   $("#cities").append(o);
 
   var uf = $('#ufs').val();
+  console.log(uf);
 
   const request = new Request(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`);
 

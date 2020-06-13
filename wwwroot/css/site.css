@@ -30,6 +30,13 @@ div.grid-item {
   width: auto;
 }
 
+span.arrow{
+  color: #000;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+};
+
 /*-----------------*/
 
 a.navbar-brand {

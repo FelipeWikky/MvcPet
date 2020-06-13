@@ -40,13 +40,14 @@ namespace MvcPet.Controllers
       if (_signInManager.IsSignedIn(User))
       {
         var users = from m in _context.Users select m;
-
-        // users = users.Where( u => u.userId.Equals( _userManager.GetUserId(User) ) );
-
-        // return View(await users.ToListAsync() );
         var user = await _context.Users.FirstOrDefaultAsync(m => m.userId == _userManager.GetUserId(User));
+
+        var pets = from p in _context.Pets select p;
+        pets = pets.Where(pet => pet.created == DateTime.Today);
+
         UserPetViewModel vm = new UserPetViewModel();
         vm.User = user;
+        vm.Pets = await pets.ToListAsync();
         // return View(user);
         return View(vm);
       }

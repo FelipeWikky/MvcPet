@@ -13,6 +13,14 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="petId" />
             <div class="form-group">
+                <label asp-for="animalid" class="control-label"></label>
+                <select class="form-control" id="animalid" asp-for="animalid">
+                    @foreach(Animalclass an in ViewBag.animals){
+                        <option value="@an.id">@an.name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
                 <label asp-for="species" class="control-label"></label>
                 <input asp-for="species" class="form-control" />
                 <span asp-validation-for="species" class="text-danger"></span>
@@ -32,12 +40,29 @@
                 <input asp-for="image" class="form-control" />
                 <span asp-validation-for="image" class="text-danger"></span>
             </div>
-            @* <div class="form-group">
-                <label asp-for="created" class="control-label"></label>
-                <input asp-for="created" class="form-control" />
-                <span asp-validation-for="created" class="text-danger"></span>
-            </div> *@
             <input type="hidden" asp-for="created" />
+            <div class="form-group">
+                <label asp-for="uf" class="control-label"></label> (@Model.uf)
+                <select class="form-control" id="ufs" asp-for="uf" onclick="getCities();" onchange="getCities();">
+                    @foreach(UF uf in ViewBag.ufs){
+                        <option value="@uf.sigla">@uf.nome</option>
+                    }
+                </select>
+                <script>
+									async function request(){
+										await getCities();
+									}
+									request();
+                </script>
+
+                <br>
+
+                <label asp-for="city" class="control-label"></label>
+                <a onclick="getCities();" href="#cities">(anteriormente: @Model.city)</a>
+                <select id="cities" class="form-control" asp-for="city" >
+                    <option selected value="">Cidades</option>
+                </select>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Confirmar alterações" class="btn btn-primary" />
             </div>
