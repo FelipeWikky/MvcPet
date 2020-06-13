@@ -20551,6 +20551,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Home\\Error404.cshtml",
+      "TargetPath": "Views\\Home\\Error404.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Csharp\\MvcPet\\Areas\\Identity\\Pages\\Account\\Manage\\PersonalData.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\PersonalData.cshtml",
       "FileKind": "mvc"
