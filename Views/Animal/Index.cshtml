@@ -1,8 +1,42 @@
 @model IEnumerable<MvcPet.Models.Animalclass>
 
-<div>
+@{
+  ViewData["Title"] = "Classes";
+}
+<style>
+  div.grid-container {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+
+  div.grid-item {
+    width: auto;
+  }
+</style>
+
+<div class="grid-container">
   @foreach (var item in Model)
   {
-    <strong>@item.id</strong> @item.name
+    <div class="grid-item">
+
+      <div class="card">
+
+        <div class="card-body">
+          <strong>@item.id</strong>
+          @item.name
+
+          <div class="row">
+            <a href="#">Editar </a>
+            &nbsp;|&nbsp;
+            <a href="#"> Excluir</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>    
   }
 </div>

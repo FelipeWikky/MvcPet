@@ -28,13 +28,13 @@ namespace MvcPet.Controllers
 {
   
   [Authorize(Roles = "Admin")]
-  public class AnimalControler : Controller
+  public class AnimalController : Controller
   {
     private readonly MvcPetContext _context;
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly UserManager<IdentityUser> _userManager;
 
-    public AnimalControler(
+    public AnimalController(
       MvcPetContext context,
       UserManager<IdentityUser> userManager,
       SignInManager<IdentityUser> signInManager
@@ -45,6 +45,7 @@ namespace MvcPet.Controllers
       _userManager = userManager;
     }
 
+    [HttpGet]
     public async Task<IActionResult> Index(){
       return View( await _context.Animals.ToListAsync() );
     }
