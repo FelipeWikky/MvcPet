@@ -20571,11 +20571,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Shared\\_NotifyMessage.cshtml",
-      "TargetPath": "Views\\Shared\\_NotifyMessage.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "e:\\Csharp\\MvcPet\\Areas\\Identity\\Pages\\Account\\ResetPasswordConfirmation.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\ResetPasswordConfirmation.cshtml",
       "FileKind": "mvc"
@@ -20598,6 +20593,11 @@
     {
       "FilePath": "e:\\Csharp\\MvcPet\\Views\\Role\\Edit.cshtml",
       "TargetPath": "Views\\Role\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Shared\\_AlertPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_AlertPartial.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20828,6 +20828,11 @@
     {
       "FilePath": "e:\\Csharp\\MvcPet\\Views\\_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Pet\\Donate.cshtml",
+      "TargetPath": "Views\\Pet\\Donate.cshtml",
       "FileKind": "mvc"
     }
   ],

@@ -67,13 +67,18 @@
         }
     </dl>
 
-
     <hr>
 
     @if ( SignInManager.IsSignedIn(User) ) {
-        <a href="#" class="btn btn-outline-success">Quero adotar!</a>
-    } else {
-        <a  asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-success">Interesse em adotar!</a>    
+        <form asp-action="Donate" method="POST">
+            <input type="hidden" name="id" asp-for="@Model.petId">
+            <button  class="btn btn-outline-success" type="submit">Quero Adotar!</button>
+        </form>
+    } 
+    else {
+        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-success">
+            Interesse em adotar!
+        </a>    
     }
 
 </div>

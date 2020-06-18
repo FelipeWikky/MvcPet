@@ -37,24 +37,21 @@ namespace MvcPet.Controllers
 
     public async Task<IActionResult> Index()
     {
+      var pets = from p in _context.Pets select p;
+      pets = pets.Where(pet => pet.created == DateTime.Today);
+      
+      UserPetViewModel vm = new UserPetViewModel();
+      vm.Pets = await pets.ToListAsync();
+
       if (_signInManager.IsSignedIn(User))
       {
         var users = from m in _context.Users select m;
         var user = await _context.Users.FirstOrDefaultAsync(m => m.userId == _userManager.GetUserId(User));
-
-        var pets = from p in _context.Pets select p;
-        pets = pets.Where(pet => pet.created == DateTime.Today);
-
-        UserPetViewModel vm = new UserPetViewModel();
         vm.User = user;
-        vm.Pets = await pets.ToListAsync();
-        // return View(user);
-        return View(vm);
+        
+        // return View(vm);
       }
-      else
-      {
-        return View();
-      }
+      return View(vm);
     }
 
     public IActionResult About()

@@ -50,15 +50,15 @@
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">
 				@{
-					int count = 0;
+					@* int count = 0; *@
 					for(int i =0; i < Model.Pets.Count(); i++){
-						if (count == 0) {
-							<li data-target="#carouselExampleIndicators" data-slide-to="@count" class="active"></li>
-							count++;
-							continue;
+						if (i == 0) {
+							<li data-target="#carouselExampleIndicators" data-slide-to="@i" class="active"></li>
+							@* count++;
+							continue; *@
 						}
-						<li data-target="#carouselExampleIndicators" data-slide-to="@count"></li>
-						count++;
+						<li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
+						@* count++; *@
 					}
 				}
 			</ol>

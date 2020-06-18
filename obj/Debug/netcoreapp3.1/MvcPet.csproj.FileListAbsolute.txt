@@ -227,5 +227,6 @@ E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Role\Create.cshtml.g.cs
 E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Role\Index.cshtml.g.cs
 E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Role\Edit.cshtml.g.cs
 E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Role\Users.cshtml.g.cs
-E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_NotifyMessage.cshtml.g.cs
 E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Home\Error404.cshtml.g.cs
+E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Pet\Donate.cshtml.g.cs
+E:\Csharp\MvcPet\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_AlertPartial.cshtml.g.cs

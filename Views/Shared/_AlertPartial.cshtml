@@ -1,0 +1,41 @@
+<style>
+  div.alert{
+    display: flex;
+    flex:1;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    width: 100%;
+    max-width: 100%;
+  };
+</style>
+
+@if(TempData["Alert"] != null) {
+  string code = TempData["Alert"].ToString().Split(":")[0];
+  string message = TempData["Alert"].ToString().Split(":")[1];
+
+  <div class="alert">
+
+    @if ( code.ToLower().Equals("success") ) {
+      <div class="alert alert-success" role="alert">
+        @message
+      </div>
+    }
+    @if ( code.ToLower().Equals("warning") ) {
+      <div class="alert alert-warning" role="alert">
+        @message
+      </div>
+    }
+    @if ( code.ToLower().Equals("danger") ) {
+      <div class="alert alert-danger" role="alert">
+        @message
+      </div>
+    }
+    @if ( code.ToLower().Equals("primary") ) {
+      <div class="alert alert-primary" role="alert">
+        @message
+      </div>
+    }
+
+  </div>
+}

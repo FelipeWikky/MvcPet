@@ -58,6 +58,7 @@ namespace MvcPet.Controllers
 
       if ( filter > 0 ) {
         pets = pets.Where(p => p.animalid == filter);
+        // TempData["Alert"] = "Primary: Filtrando os Pets..";
       }
 
       List<Pet> listPet = await pets.ToListAsync();
@@ -289,12 +290,47 @@ namespace MvcPet.Controllers
       }
     }
 
-    [HttpGet]
-    public IActionResult Donate(string id)
-    {
-      int petId = Convert.ToInt32(id);
-      return View();
+    [HttpPost]
+    public async Task<IActionResult> Donate(string id) {
+      Pet pet = await _context.Pets.FirstOrDefaultAsync(p => p.petId == Convert.ToInt32(id) );
+
+      //usuário que está doando o pet
+      User doador = await _context.Users.FirstOrDefaultAsync(u => u.userId == pet.donoruserId );
+      //usuário que quer adotar o pet
+      User donatario = await _context.Users.FirstOrDefaultAsync(u => u.userId == _userManager.GetUserId(User));
+
+      if (doador.userId == donatario.userId) {
+        TempData["Alert"] = "Danger:Não pode adotar um pet que você mesmo cadastrou!";
+        return RedirectToAction("Details", "Pet", new {id = id});
+      }
+
+      Console.WriteLine(id);
+      return RedirectToAction("Index");
     }
+
+    // [HttpGet]
+    // public async Task<IActionResult> Donate()
+    // {
+    //   if ( !_signInManager.IsSignedIn(User) ) {
+    //     return RedirectToPage("/Account/Login");
+    //   }
+    //   int petId = Convert.ToInt32(id);
+
+    //   //var user = await _context.Users.FirstOrDefaultAsync(u => u.userId == iUser.Id );
+    //   User user = await _context.Users.FirstOrDefaultAsync(u => u.userId == _userManager.GetUserId(User));
+      
+    //   Pet pet = await _context.Pets.FirstOrDefaultAsync(p => p.petId == petId);
+
+    //   UserPetViewModel viewModel = new UserPetViewModel();
+    //   viewModel.Pet = pet;
+    //   viewModel.User = user;
+
+    //   if (pet.donoruserId == user.userId) {
+    //     Console.WriteLine("Nao pode adotar um pet que você mesmo cadastrou!");
+    //   }
+
+    //   return View(viewModel);
+    // }
 
   }
 
