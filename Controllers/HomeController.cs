@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MvcPet.Models;
+using MvcPet.ViewModels;
 using MvcPet.Data;
 
 using Microsoft.EntityFrameworkCore;

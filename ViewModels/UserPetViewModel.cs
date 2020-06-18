@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MvcPet.Models;
 
-namespace MvcPet.Models {
+namespace MvcPet.ViewModels {
   public class UserPetViewModel {
 
     public User User {get;set;}
