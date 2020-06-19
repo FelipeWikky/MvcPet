@@ -304,33 +304,30 @@ namespace MvcPet.Controllers
         return RedirectToAction("Details", "Pet", new {id = id});
       }
 
-      Console.WriteLine(id);
-      return RedirectToAction("Index");
+      Donation donation = await _context.Donations.FirstOrDefaultAsync(
+        d =>
+          d.doador.userId == doador.userId
+        &&
+          d.doacao.petId == pet.petId
+        &&
+          d.donatario.userId == donatario.userId
+      );
+
+      if (donation != null) {
+        TempData["Alert"] = "Danger:Você já demonstrou interesse em adotar este Pet!";
+        return RedirectToAction("Details", "Pet", new {id = id});  
+      }
+
+      donation = new Donation();
+      donation.doacao = pet;
+      donation.doador = doador;
+      donation.donatario = donatario;
+      _context.Donations.Add(donation);
+      await _context.SaveChangesAsync();
+
+      TempData["Alert"] = "Success:Notificação de Adoção encaminhada para o Doador!";
+        return RedirectToAction("Details", "Pet", new {id = id});
     }
-
-    // [HttpGet]
-    // public async Task<IActionResult> Donate()
-    // {
-    //   if ( !_signInManager.IsSignedIn(User) ) {
-    //     return RedirectToPage("/Account/Login");
-    //   }
-    //   int petId = Convert.ToInt32(id);
-
-    //   //var user = await _context.Users.FirstOrDefaultAsync(u => u.userId == iUser.Id );
-    //   User user = await _context.Users.FirstOrDefaultAsync(u => u.userId == _userManager.GetUserId(User));
-      
-    //   Pet pet = await _context.Pets.FirstOrDefaultAsync(p => p.petId == petId);
-
-    //   UserPetViewModel viewModel = new UserPetViewModel();
-    //   viewModel.Pet = pet;
-    //   viewModel.User = user;
-
-    //   if (pet.donoruserId == user.userId) {
-    //     Console.WriteLine("Nao pode adotar um pet que você mesmo cadastrou!");
-    //   }
-
-    //   return View(viewModel);
-    // }
 
   }
 
