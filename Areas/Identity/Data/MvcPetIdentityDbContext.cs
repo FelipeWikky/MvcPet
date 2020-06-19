@@ -28,6 +28,7 @@ namespace MvcPet.Areas.Identity.Data
         public DbSet<Pet> Pets { get; set; }
         public DbSet<Animalclass> Animals { get; set; }
         public DbSet<UF> Ufs { get; set; }
+        public DbSet<Donation> Donations { get; set; }
 
         
     }
