@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcPet.Data;
 using MvcPet.Models;
+using MvcPet.ViewModels;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -329,6 +330,31 @@ namespace MvcPet.Controllers
         return RedirectToAction("Details", "Pet", new {id = id});
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Interest(){
+      InterestViewModel vm = new InterestViewModel();
+
+      IdentityUser identityUser = await _userManager.GetUserAsync(User);
+      var query = from i in _context.Donations select i;
+      query = query.Where( i => i.donatario.userId == identityUser.Id );
+
+      List<Donation> interesses = await query.ToListAsync();
+
+      foreach(var item in interesses){
+        item.doador = await _context.Users.FirstOrDefaultAsync(u => u.userId == item.doadoruserId);
+        item.doacao = await _context.Pets.FirstOrDefaultAsync(p => p.petId == item.doacaopetId);
+        item.donatario = await _context.Users.FirstOrDefaultAsync(u => u.userId == item.donatariouserId);
+      }
+      vm.interesses = interesses; //pets que eu demonstrei interesse
+
+      
+
+      List<Donation> interessados = new List<Donation>();
+      vm.interessados = interessados; //pets que usuários ficaram interessados
+
+      return View(vm);
+    }
+  
   }
 
 }

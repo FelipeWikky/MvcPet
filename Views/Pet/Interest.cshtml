@@ -1,0 +1,58 @@
+@* @model IEnumerable<MvcPet.Models.Donation> *@
+@model MvcPet.ViewModels.InterestViewModel
+
+@{
+  ViewData["Title"] = "Interesses";
+}
+
+<style>
+  div.row-between{
+    justify-content: space-between;
+    flex-direction: row;
+  }
+</style>
+
+<p>
+  <div class="row row-between">
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapse-1" role="button" aria-expanded="false" aria-controls="collapse-1">
+      Meus Pets interessados
+    </a>
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapse-2" role="button" aria-expanded="false" aria-controls="collapse-2">
+      Meus Interesses em Pets
+    </a>
+  </div>
+</p>
+
+<hr>
+
+<div class="collapse" id="collapse-1">
+  <h5>Meus Pets que receberam notificações de Interesse</h5>
+  <div class="card card-body">
+    Aqui é os Meus Pets que receberam Interesse
+  </div>
+
+  <br>
+  <br>
+</div>
+
+<div class="collapse" id="collapse-2">
+  <h5>Pets que eu demonstrei Interesse</h5>
+  <hr>
+  <div class="card card-body">
+    @{
+      foreach(var item in Model.interesses) {
+        <div class="card">
+          <div class="card-body">
+            <p>
+              Doador: @item.doador.name
+            </p>
+            <p>
+              Pet: @item.doacao.breed - @item.doacao.species
+            </p>
+          </div> 
+        </div>
+        <br>
+      }
+    }
+  </div>
+</div>

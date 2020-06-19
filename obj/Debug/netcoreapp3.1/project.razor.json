@@ -20531,6 +20531,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Csharp\\MvcPet\\Views\\Pet\\Interest.cshtml",
+      "TargetPath": "Views\\Pet\\Interest.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Csharp\\MvcPet\\Areas\\Identity\\Pages\\Account\\Manage\\TwoFactorAuthentication.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\TwoFactorAuthentication.cshtml",
       "FileKind": "mvc"
