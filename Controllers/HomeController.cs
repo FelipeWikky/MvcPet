@@ -39,6 +39,8 @@ namespace MvcPet.Controllers
     public async Task<IActionResult> Index()
     {
       var pets = from p in _context.Pets select p;
+      // pets = pets.Where(pet => pet.created == DateTime.Today);
+      DateTime date = new DateTime(2020, 06, 13);
       pets = pets.Where(pet => pet.created == DateTime.Today);
       
       UserPetViewModel vm = new UserPetViewModel();

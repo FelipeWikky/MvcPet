@@ -27,10 +27,25 @@
 
 <div class="collapse" id="collapse-1">
   <h5>Meus Pets que receberam notificações de Interesse</h5>
+  <hr>
   <div class="card card-body">
-    Aqui é os Meus Pets que receberam Interesse
+    @{
+      foreach(var item in Model.interesses) {
+        <div class="card">
+          <div class="card-body">
+            <p>
+              Doador: @item.doador.name
+            </p>
+            <p>
+              Pet: @item.doacao.breed - @item.doacao.species
+            </p>
+          </div> 
+        </div>
+        <br>
+      }
+    }
   </div>
-
+  
   <br>
   <br>
 </div>

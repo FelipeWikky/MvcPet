@@ -67,11 +67,11 @@
 			<div class="carousel-inner">
 				@{
 					bool first = true;
-					foreach(var item in Model.Pets){
-						if (first) {
-							first = false;
-							<div class="carousel-item active">
-								<div class="card" style="margin-bottom: 10px;">
+					string active = "active";
+					if (Model.Pets.Count() > 0) {
+						foreach(var item in Model.Pets){
+							<div class="carousel-item @active" style="">
+								<div class="card" style="margin-bottom: 10px; width: 50%; margin-left: auto; margin-right: auto;">
 									<h5 class="card-header">@item.species</h5>
 									<div class="card-body">
 										<h4 style="font-weight:bold;">@item.breed</h4>
@@ -92,52 +92,33 @@
 											<br>
 											@item.uf - @item.city
 										</p>
-										<a asp-controller="Pet" asp-action="Details" asp-route-id="@item.petId" class="btn btn-primary">Mais informações</a>
+										<a asp-controller="Pet" asp-action="Details" asp-route-id="@item.petId" class="btn btn-primary" target="_blank">Mais informações</a>
 										<br>
 									</div>
 								</div>
 							</div>
-						} else {
-							<div class="carousel-item">
-								<div class="card" style="margin-bottom: 10px;">
-									<h5 class="card-header">@item.species</h5>
-									<div class="card-body">
-										<h4 style="font-weight:bold;">@item.breed</h4>
-										<p class="card-text" style="color: #7f7f7f; max-lines:1;"> @item.description. </p>
-										<p>
-											<a class="btn btn-outline-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-												Preview do Pet - Imagem
-											</a>
-										</p>
-										<div class="collapse" id="collapseExample">
-											<div class="card card-body">
-												<img src="@item.image" alt="" width="100px" height="100px">
-												<a href="@item.image" target="_blank">Visualizar em tamanho real</a>
-											</div>
-										</div>
-										<p class="card-text" style="color: #7f7f7f;">
-											Cadastrado em @item.created.ToString().Split(" ")[0]
-											<br>
-											@item.uf - @item.city
-										</p>
-										<a asp-controller="Pet" asp-action="Details" asp-route-id="@item.petId" class="btn btn-primary">Mais informações</a>
-										<br>
-									</div>
-								</div>
-							</div>	
+							if (first) {
+								first = false;
+								active = "";
+							}
 						}
+						<a class="carousel-control-prev text-warning" href="#carouselExampleIndicators" role="button" data-slide="prev">
+							<span class="arrow carousel-control-prev-icon bg-dark" aria-hidden="true">  </span>
+							<span class="sr-only">Próximo</span>
+						</a>
+						<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+							<span class="arrow carousel-control-next-icon bg-dark" aria-hidden="true">  </span>
+							<span class="sr-only">Anterior</span>
+						</a>
+					} else {
+						<div class="card card-body">
+							<h5>Nenhum Pet cadastrado hoje</h5>
+							<a asp-controller="Pet" asp-action="Create">Cadastrar novo Pet</a>
+						</div>
 					}
 				}
 			</div>
 
-			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-				<span class="arrow carousel-control-prev-icon" aria-hidden="true"> < </span>
-				<span class="sr-only">Próximo</span>
-			</a>
-			<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-				<span class="arrow carousel-control-next-icon" aria-hidden="true"> > </span>
-				<span class="sr-only">Anterior</span>
-			</a>
 		</div>
 
 	</div>
