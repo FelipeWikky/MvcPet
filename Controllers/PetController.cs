@@ -76,6 +76,7 @@ namespace MvcPet.Controllers
     }
 
     // GET: Pet/Details/5
+    [AllowAnonymous]
     public async Task<IActionResult> Details(int? id)
     {
       if (id == null)
@@ -334,8 +335,9 @@ namespace MvcPet.Controllers
     [HttpGet]
     public async Task<IActionResult> Interest(){
       InterestViewModel vm = new InterestViewModel();
-
       IdentityUser identityUser = await _userManager.GetUserAsync(User);
+
+      //Recuperando Interesses
       var query = from i in _context.Donations select i;
       query = query.Where( i => i.donatario.userId == identityUser.Id );
 
@@ -348,9 +350,16 @@ namespace MvcPet.Controllers
       }
       vm.interesses = interesses; //pets que eu demonstrei interesse
 
-      
+      //Recuperando Interessados
+      var query2 = from i in _context.Donations select i;
+      query2 = query2.Where(i => i.doador.userId == identityUser.Id);
 
-      List<Donation> interessados = new List<Donation>();
+      List<Donation> interessados = await query2.ToListAsync();
+      foreach(var item in interessados){
+        item.doador = await _context.Users.FirstOrDefaultAsync(u => u.userId == item.doadoruserId);
+        item.doacao = await _context.Pets.FirstOrDefaultAsync(p => p.petId == item.doacaopetId);
+        item.donatario = await _context.Users.FirstOrDefaultAsync(u => u.userId == item.donatariouserId);
+      }
       vm.interessados = interessados; //pets que usuários ficaram interessados
 
       return View(vm);

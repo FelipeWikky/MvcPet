@@ -30,14 +30,17 @@
   <hr>
   <div class="card card-body">
     @{
-      foreach(var item in Model.interesses) {
+      foreach(var item in Model.interessados) {
         <div class="card">
           <div class="card-body">
             <p>
-              Doador: @item.doador.name
+              Usuário interessado: @item.donatario.name
             </p>
             <p>
-              Pet: @item.doacao.breed - @item.doacao.species
+              Pet de interesse: 
+              <a asp-controller="Pet" asp-action="Details" asp-route-id="@item.doacao.petId" target="_blank">
+                @item.doacao.breed - @item.doacao.species
+              </a>
             </p>
           </div> 
         </div>
@@ -45,13 +48,13 @@
       }
     }
   </div>
-  
+
   <br>
   <br>
 </div>
 
 <div class="collapse" id="collapse-2">
-  <h5>Pets que eu demonstrei Interesse</h5>
+  <h5>Pets que eu demonstrei Interesse em Adotar</h5>
   <hr>
   <div class="card card-body">
     @{
@@ -62,7 +65,10 @@
               Doador: @item.doador.name
             </p>
             <p>
-              Pet: @item.doacao.breed - @item.doacao.species
+              Pet: 
+              <a asp-controller="Pet" asp-action="Details" asp-route-id="@item.doacao.petId" target="_blank">
+                @item.doacao.breed - @item.doacao.species
+              </a>
             </p>
           </div> 
         </div>
