@@ -31,6 +31,7 @@
 </style>
 
 <div class="text-center">
+	@* Bem vindo user *@
 	@if ( SignInManager.IsSignedIn(User) ) {
 		@* <h1>Bem vindo @UserManager.GetUserName(User) </h1>  *@
 					string firstName = Model.User.name.Split(" ")[0];
@@ -43,6 +44,7 @@
 		<h3 class="display-4">Seja Bem vindo!</h3>
 	}
 
+	@* Pets do dia *@
 	<div>
 		<h2>Pets do dia!</h2>
 		<small>Cadastrado(s) hoje (@DateTime.Today.ToString().Split(" ")[0])</small>
@@ -125,13 +127,14 @@
 
 	<br><br><br>
 
+	@* Blog entre Usuários *@
 	<div class="card">
 		<div class="card-header">
-			Por que adotar?
+			Últimas noticias
 		</div>
 		<div class="card-body">
 			<p>
-
+				Blog news
 			</p>
 		</div>
 	</div>

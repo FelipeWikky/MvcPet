@@ -50,7 +50,13 @@
                 Cadastrado por
             </dt>
             <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.donor.name)
+                @* <a  asp-controller="User" asp-action="Details" asp-route-id="@Model.donor.userId" target="_blank">
+                    @Html.DisplayFor(model => model.donor.name)
+                </a> *@
+                <form name="detail" asp-controller="User" asp-action="Details" method="post">
+                    <input type="hidden" name="id" asp-for="@Model.donor.userId">
+                    <a href="javascript:detail.submit()">@Html.DisplayFor(model => model.donor.name)</a>
+                </form>
             </dd>
             <dt class = "col-sm-2">
                 Telefone p/ Contato

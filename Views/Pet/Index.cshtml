@@ -56,9 +56,15 @@
 						<br>
 						@item.uf - @item.city
 					</p>
+					
+					<form name="detail" asp-controller="User" asp-action="Details" method="post">
+						<input type="hidden" name="id" asp-for="@item.donor.userId">
+						@* <a href="javascript:detail.submit()">@item.donor.name</a> *@
+						<button type="submit" style="background-color: #FFF; border-width: 0px; color:#4f7fbb;">@item.donor.name</button>
+					</form>
 
 					<p style="color: #7f7f7f;">
-						Doador: <a asp-controller="User" asp-action="Details" asp-route-id="@item.donor.userId" target="_blank">@item.donor.name</a>
+						
 					</p>
 
 					<a asp-action="Details" asp-route-id="@item.petId" class="btn btn-primary">Mais informações</a>

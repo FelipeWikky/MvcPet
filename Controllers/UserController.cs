@@ -38,11 +38,14 @@ namespace MvcPet.Controllers
       _roleManager = roleManager;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> Details(string id)
-    {
+    // [HttpGet]
+    // public IActionResult Details(User user)
+    // {
+    //   return View(user);
+    // }
+    [HttpPost]
+    public async Task<IActionResult> Details(string id) {
       User user = await _context.Users.FirstOrDefaultAsync(u => u.userId == id);
-
       return View(user);
     }
 
