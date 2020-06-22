@@ -34,7 +34,13 @@
         <div class="card">
           <div class="card-body">
             <p>
-              Usuário interessado: @item.donatario.name
+              Usuário interessado: 
+              <form name="detail" asp-controller="User" asp-action="Details" method="post">
+                <input type="hidden" name="id" asp-for="@item.donatario.userId">
+                <button type="submit" style="background-color: #FFF; border-width: 0px; color:#4f7fbb;">
+                  @item.donatario.name
+                </button>
+              </form>
             </p>
             <p>
               Pet de interesse: 
@@ -62,7 +68,11 @@
         <div class="card">
           <div class="card-body">
             <p>
-              Doador: @item.doador.name
+              Doador: 
+              <form name="detail" asp-controller="User" asp-action="Details" method="post">
+                <input type="hidden" name="id" asp-for="@item.doador.userId">
+                <button type="submit" style="background-color: #FFF; border-width: 0px; color:#4f7fbb;">@item.doador.name</button>
+              </form>
             </p>
             <p>
               Pet: 
