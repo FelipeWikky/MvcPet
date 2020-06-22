@@ -42,25 +42,29 @@ namespace MvcPet.Controllers
     }
 
     // GET: Pet
-    public async Task<IActionResult> Index(int filter)
+    public async Task<IActionResult> Index(int animal, string uf, int useCreated, DateTime created)
     {
+      Console.WriteLine(created);
+      ViewBag.Animals = await _context.Animals.ToListAsync();
 
-      var animals = from a in _context.Animals select a;
-      ViewBag.Animals = await animals.ToListAsync();
-
-      foreach(Animalclass an in ViewBag.Animals){
-        if (an.id == filter) {
-          ViewBag.filter = an.name;
-          break;
-        }
-      }
+      ViewBag.Ufs = await _context.Ufs.OrderByDescending(u => u.sigla).ToListAsync();
 
       var pets = from m in _context.Pets select m;
       pets = pets.OrderByDescending(s => s.petId);
 
-      if ( filter > 0 ) {
-        pets = pets.Where(p => p.animalid == filter);
-        // TempData["Alert"] = "Primary: Filtrando os Pets..";
+
+      // Filtros
+      if (animal > 0) {
+        pets = pets.Where(p => p.animalid == animal);
+        ViewBag.animal = (await _context.Animals.FirstOrDefaultAsync(a => a.id == animal)).name;
+      }
+      if (!String.IsNullOrEmpty(uf)) {
+        pets = pets.Where(p => p.uf == uf);
+        ViewBag.uf = (await _context.Ufs.FirstOrDefaultAsync(u => u.sigla == uf)).nome;
+      }
+      if (useCreated > 0) {
+        pets = pets.Where(p => p.created == created);
+        ViewBag.created = created.ToString().Split(" ")[0];
       }
 
       List<Pet> listPet = await pets.ToListAsync();
