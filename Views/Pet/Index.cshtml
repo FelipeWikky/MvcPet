@@ -58,7 +58,7 @@
 					</p>
 
 					<p style="color: #7f7f7f;">
-						Doador: @item.donor.name
+						Doador: <a asp-controller="User" asp-action="Details" asp-route-id="@item.donor.userId" target="_blank">@item.donor.name</a>
 					</p>
 
 					<a asp-action="Details" asp-route-id="@item.petId" class="btn btn-primary">Mais informações</a>

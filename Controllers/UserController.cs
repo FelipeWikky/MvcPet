@@ -22,6 +22,7 @@ using Newtonsoft.Json;
 
 namespace MvcPet.Controllers
 {
+  [Authorize(Roles="Admin, User")]
   public class UserController : Controller
   {
     public readonly MvcPetContext _context;
@@ -38,9 +39,11 @@ namespace MvcPet.Controllers
     }
 
     [HttpGet]
-    public IActionResult Donate()
+    public async Task<IActionResult> Details(string id)
     {
-      return View();
+      User user = await _context.Users.FirstOrDefaultAsync(u => u.userId == id);
+
+      return View(user);
     }
 
     [Authorize(Roles="Admin")]
