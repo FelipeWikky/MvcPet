@@ -7,23 +7,31 @@
 <script>
 	function showCreatedInput(){
 		var input = document.getElementById('created-input');
-		input.style.visibility = 'visible';
-
 		var useCreated = document.getElementById('useCreated');
-		useCreated.value = "1";
+
+		if (useCreated.value == "0") {
+			input.style.visibility = 'visible';
+			useCreated.value = "1";
+		}
+		else {
+			input.style.visibility = "hidden";
+			useCreated.value = "0";
+		}
 	}
 </script>
 
 @{
-	string text = "Animais ";
+	string text = "Animais";
 	if (!String.IsNullOrEmpty(ViewBag.animal)) {
-		text = ViewBag.animal + "s ";
+		text += ": " + ViewBag.animal + " ";
 	}
 	if (!String.IsNullOrEmpty(ViewBag.uf)) {
-		text += " do(a) " + ViewBag.uf + " para doação";
-	} else {
-		text += "para doação";
+		text += "- UF: " + ViewBag.uf + " ";
+	} 
+	if (!String.IsNullOrEmpty(ViewBag.created)) {
+		text += "- Cadastrado em: " + ViewBag.created;
 	}
+	text += " para doação";
 	<h2>@text</h2>
 }
 

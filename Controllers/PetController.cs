@@ -24,7 +24,7 @@ using Newtonsoft.Json;
 
 namespace MvcPet.Controllers
 {
-  [Authorize(Roles="Admin, User")]
+  [Authorize(Roles = "Admin, User")]
   public class PetController : Controller
   {
     private readonly MvcPetContext _context;
@@ -32,19 +32,19 @@ namespace MvcPet.Controllers
     private readonly UserManager<IdentityUser> _userManager;
 
     public PetController(
-        MvcPetContext context,
-        UserManager<IdentityUser> userManager,
-        SignInManager<IdentityUser> signInManager)
+      MvcPetContext context,
+      UserManager<IdentityUser> userManager,
+      SignInManager<IdentityUser> signInManager
+    )
     {
       _context = context;
       _signInManager = signInManager;
       _userManager = userManager;
     }
 
-    // GET: Pet
+    [AllowAnonymous]
     public async Task<IActionResult> Index(int animal, string uf, int useCreated, DateTime created)
     {
-      Console.WriteLine(created);
       ViewBag.Animals = await _context.Animals.ToListAsync();
 
       ViewBag.Ufs = await _context.Ufs.OrderByDescending(u => u.sigla).ToListAsync();
@@ -54,15 +54,18 @@ namespace MvcPet.Controllers
 
 
       // Filtros
-      if (animal > 0) {
+      if (animal > 0)
+      {
         pets = pets.Where(p => p.animalid == animal);
         ViewBag.animal = (await _context.Animals.FirstOrDefaultAsync(a => a.id == animal)).name;
       }
-      if (!String.IsNullOrEmpty(uf)) {
+      if (!String.IsNullOrEmpty(uf))
+      {
         pets = pets.Where(p => p.uf == uf);
-        ViewBag.uf = (await _context.Ufs.FirstOrDefaultAsync(u => u.sigla == uf)).nome;
+        ViewBag.uf = (await _context.Ufs.FirstOrDefaultAsync(u => u.sigla == uf)).sigla;
       }
-      if (useCreated > 0) {
+      if (useCreated > 0)
+      {
         pets = pets.Where(p => p.created == created);
         ViewBag.created = created.ToString().Split(" ")[0];
       }
@@ -79,7 +82,6 @@ namespace MvcPet.Controllers
       return View(listPet);
     }
 
-    // GET: Pet/Details/5
     [AllowAnonymous]
     public async Task<IActionResult> Details(int? id)
     {
@@ -101,7 +103,6 @@ namespace MvcPet.Controllers
       return View(pet);
     }
 
-    // GET: Pet/Create
     public async Task<IActionResult> Create()
     {
       var ufs = await _context.Ufs.ToListAsync();
@@ -111,7 +112,7 @@ namespace MvcPet.Controllers
 
       return View();
 
-      
+
       // //recebendo estados de uma api
       // string url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/";
       // // HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
@@ -194,7 +195,6 @@ namespace MvcPet.Controllers
     // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    //public async Task<IActionResult> Edit(int id, [Bind("petId,species,breed,description,image,created")] Pet pet)
     public async Task<IActionResult> Edit(int id, [Bind("petId,animalid,species,breed,description,image,created,uf,city")] Pet pet)
     {
       if (id != pet.petId)
@@ -298,17 +298,19 @@ namespace MvcPet.Controllers
     }
 
     [HttpPost]
-    public async Task<IActionResult> Donate(string id) {
-      Pet pet = await _context.Pets.FirstOrDefaultAsync(p => p.petId == Convert.ToInt32(id) );
+    public async Task<IActionResult> Donate(string id)
+    {
+      Pet pet = await _context.Pets.FirstOrDefaultAsync(p => p.petId == Convert.ToInt32(id));
 
       //usuário que está doando o pet
-      User doador = await _context.Users.FirstOrDefaultAsync(u => u.userId == pet.donoruserId );
+      User doador = await _context.Users.FirstOrDefaultAsync(u => u.userId == pet.donoruserId);
       //usuário que quer adotar o pet
       User donatario = await _context.Users.FirstOrDefaultAsync(u => u.userId == _userManager.GetUserId(User));
 
-      if (doador.userId == donatario.userId) {
+      if (doador.userId == donatario.userId)
+      {
         TempData["Alert"] = "Danger:Não pode adotar um pet que você mesmo cadastrou!";
-        return RedirectToAction("Details", "Pet", new {id = id});
+        return RedirectToAction("Details", "Pet", new { id = id });
       }
 
       Donation donation = await _context.Donations.FirstOrDefaultAsync(
@@ -320,9 +322,10 @@ namespace MvcPet.Controllers
           d.donatario.userId == donatario.userId
       );
 
-      if (donation != null) {
+      if (donation != null)
+      {
         TempData["Alert"] = "Danger:Você já demonstrou interesse em adotar este Pet!";
-        return RedirectToAction("Details", "Pet", new {id = id});  
+        return RedirectToAction("Details", "Pet", new { id = id });
       }
 
       donation = new Donation();
@@ -333,21 +336,23 @@ namespace MvcPet.Controllers
       await _context.SaveChangesAsync();
 
       TempData["Alert"] = "Success:Notificação de Adoção encaminhada para o Doador!";
-        return RedirectToAction("Details", "Pet", new {id = id});
+      return RedirectToAction("Details", "Pet", new { id = id });
     }
 
     [HttpGet]
-    public async Task<IActionResult> Interest(){
+    public async Task<IActionResult> Interest()
+    {
       InterestViewModel vm = new InterestViewModel();
       IdentityUser identityUser = await _userManager.GetUserAsync(User);
 
       //Recuperando Interesses
       var query = from i in _context.Donations select i;
-      query = query.Where( i => i.donatario.userId == identityUser.Id );
+      query = query.Where(i => i.donatario.userId == identityUser.Id);
 
       List<Donation> interesses = await query.ToListAsync();
 
-      foreach(var item in interesses){
+      foreach (var item in interesses)
+      {
         item.doador = await _context.Users.FirstOrDefaultAsync(u => u.userId == item.doadoruserId);
         item.doacao = await _context.Pets.FirstOrDefaultAsync(p => p.petId == item.doacaopetId);
         item.donatario = await _context.Users.FirstOrDefaultAsync(u => u.userId == item.donatariouserId);
@@ -359,7 +364,8 @@ namespace MvcPet.Controllers
       query2 = query2.Where(i => i.doador.userId == identityUser.Id);
 
       List<Donation> interessados = await query2.ToListAsync();
-      foreach(var item in interessados){
+      foreach (var item in interessados)
+      {
         item.doador = await _context.Users.FirstOrDefaultAsync(u => u.userId == item.doadoruserId);
         item.doacao = await _context.Pets.FirstOrDefaultAsync(p => p.petId == item.doacaopetId);
         item.donatario = await _context.Users.FirstOrDefaultAsync(u => u.userId == item.donatariouserId);
@@ -368,7 +374,7 @@ namespace MvcPet.Controllers
 
       return View(vm);
     }
-  
+
   }
 
 }
